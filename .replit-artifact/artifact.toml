@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Thakral Infoways"
+version = "1.0.0"
+id = "artifacts/thakral-infoways"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 25222
+
+[services.development]
+run = "pnpm --filter @workspace/thakral-infoways run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/thakral-infoways", "run", "build" ]
+publicDir = "artifacts/thakral-infoways/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "25222"
+BASE_PATH = "/"
